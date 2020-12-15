@@ -40,6 +40,7 @@ namespace SportingGoods.Models.Repositories
                 item1.Price = item.Price;
                 item1.Description = item.Description;
                 item1.Brand = item.Brand;
+                item1.Category = item.Category;
                 context.SaveChanges();
             }
         }

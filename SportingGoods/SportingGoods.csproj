@@ -12,12 +12,24 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="Migrations\20201215132322_InitialCreate.cs" />
+    <Compile Include="Migrations\20201215132322_InitialCreate.Designer.cs" />
+    <Compile Include="Migrations\20201215163114_add_category_to_item_model.cs" />
+    <Compile Include="Migrations\20201215163114_add_category_to_item_model.Designer.cs" />
+    <Compile Include="Migrations\20201215183715_edit_photo.cs" />
+    <Compile Include="Migrations\20201215183715_edit_photo.Designer.cs" />
+    <Compile Include="Migrations\AppDbContextModelSnapshot.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
   </ItemGroup>
 
 </Project>

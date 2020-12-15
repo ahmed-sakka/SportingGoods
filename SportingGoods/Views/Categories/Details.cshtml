@@ -1,0 +1,36 @@
+﻿@model SportingGoods.Models.Category
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<div class="page-title">
+    <h3 class="breadcrumb-header">Category details</h3>
+</div>
+
+<div id="main-wrapper">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.Name)</th>
+                                <td>@Html.DisplayFor(model => model.Name)</td>
+                            </tr>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.Description)</th>
+                                <td>@Html.DisplayFor(model => model.Description)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- Row -->
+</div><!-- Main Wrapper -->
+
+<a class="btn btn-info" asp-action="Index"><i class="icon-arrow-left2 m-r-xs"></i>Return</a>

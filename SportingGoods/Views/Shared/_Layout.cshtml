@@ -1,48 +1,168 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="~/images/logo/icon.png">
+
     <title>@ViewData["Title"] - SportingGoods</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+
+    <!-- Styles -->
+    <link href="~/css/googlefonts.css?family=Ubuntu" rel="stylesheet">
+    <link href="~/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/plugins/icomoon/style.css" rel="stylesheet">
+    <link href="~/plugins/uniform/css/default.css" rel="stylesheet" />
+    <link href="~/plugins/switchery/switchery.min.css" rel="stylesheet" />
+    <link href="~/plugins/nvd3/nv.d3.min.css" rel="stylesheet">
+    <link href="~/plugins/datatables/css/jquery.datatables.min.css" rel="stylesheet">
+    <link href="~/plugins/datatables/css/jquery.datatables_themeroller.css" rel="stylesheet">
+    <link href="~/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet">
+
+
+    <!-- Theme Styles -->
+    <link href="~/css/ecaps.min.css" rel="stylesheet">
+    <link href="~/css/custom.css" rel="stylesheet">
+    
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SportingGoods</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+
+    <!-- Page Container -->
+    <div class="page-container">
+        <!-- Page Sidebar -->
+        <div class="page-sidebar">
+            <a class="logo-box" asp-area="" asp-controller="Home" asp-action="Index">
+                <span>Sporting Goods</span>
+                <i class="icon-radio_button_unchecked" id="fixed-sidebar-toggle-button"></i>
+                <i class="icon-close" id="sidebar-toggle-button-close"></i>
+            </a>
+            <div class="page-sidebar-inner">
+                <div class="page-sidebar-menu">
+                    <ul class="accordion-menu">
+
+                        <li class="menu-divider"></li>
+
+                        <li class="active-page">
+                            <a asp-area="" asp-controller="Home" asp-action="Index">
+                                <i class="menu-icon icon-dashboard"></i><span>Dashboard</span>
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <li class="">
+                            <a asp-area="" asp-controller="Clients" asp-action="Index">
+                                <i class="menu-icon icon-people"></i><span>Clients</span>
+                            </a>
                         </li>
+                        <li class="">
+                            <a asp-area="" asp-controller="Categories" asp-action="Index">
+                                <i class="menu-icon icon-format_list_bulleted"></i><span>Categories</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a asp-area="" asp-controller="Bills" asp-action="Index">
+                                <i class="menu-icon icon-cart"></i><span>Bills</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a asp-area="" asp-controller="Items" asp-action="Index">
+                                <i class="menu-icon icon-shop"></i><span>Items</span>
+                            </a>
+                        </li>
+
+
                     </ul>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+        </div><!-- /Page Sidebar -->
+        <!-- Page Content -->
+        <div class="page-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="search-form">
+                    <form action="#" method="GET">
+                        <div class="input-group">
+                            <input type="text" name="search" class="form-control search-input"
+                                   placeholder="Type something...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" id="close-search" type="button">
+                                    <i class="icon-close"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - SportingGoods - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li>
+                                    <a href="javascript:void(0)" id="collapsed-sidebar-toggle-button">
+                                        <i class="fa fa-bars"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" id="toggle-fullscreen"><i class="fa fa-expand"></i></a>
+                                </li>
+                                <li><a href="javascript:void(0)" id="search-button"><i class="fa fa-search"></i></a></li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+
+                                <li class="dropdown user-dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                       aria-haspopup="true" aria-expanded="false">
+                                        <img src="~/images/1.jpeg" alt="" class="img-circle">
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">My Account</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Sign Out</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div><!-- /.navbar-collapse -->
+                    </div><!-- /.container-fluid -->
+                </nav>
+            </div><!-- /Page Header -->
+            <!-- Page Inner -->
+            <div class="page-inner">
+
+                @RenderBody()
+
+                <div class="page-footer">
+                    <p>Made by <b>Ahmed Sakka</b> & <b>Ayman Elleuch</b>, ENIS 2020</p>
+                </div>
+            </div><!-- /Page Inner -->
+
+        </div><!-- /Page Content -->
+    </div><!-- /Page Container -->
+    <!-- Javascripts -->
+    <script src="~/plugins/jquery/jquery-3.1.0.min.js"></script>
+    <script src="~/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="~/plugins/uniform/js/jquery.uniform.standalone.js"></script>
+    <script src="~/plugins/switchery/switchery.min.js"></script>
+    <script src="~/plugins/nvd3/nv.d3.min.css"></script>
+    <script src="~/plugins/d3/d3.min.js"></script>
+    <script src="~/plugins/flot/jquery.flot.min.js"></script>
+    <script src="~/plugins/flot/jquery.flot.time.min.js"></script>
+    <script src="~/plugins/flot/jquery.flot.symbol.min.js"></script>
+    <script src="~/plugins/flot/jquery.flot.resize.min.js"></script>
+    <script src="~/plugins/flot/jquery.flot.tooltip.min.js"></script>
+    <script src="~/plugins/flot/jquery.flot.pie.min.js"></script>
+    <script src="~/plugins/chartjs/chart.min.js"></script>
+    <script src="~/js/ecaps.min.js"></script>
+    <script src="~/js/pages/dashboard.js"></script>
+    <script src="~/plugins/datatables/js/jquery.datatables.min.js"></script>
+    <script src="~/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="~/js/pages/table-data.js"></script>
     @RenderSection("Scripts", required: false)
+
 </body>
 </html>
+

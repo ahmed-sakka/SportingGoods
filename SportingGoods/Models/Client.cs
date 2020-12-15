@@ -15,6 +15,7 @@ namespace SportingGoods.Models
         public string LastName { get; set; }
         public string Gender { get; set; }
         [Required]
+        [StringLength(8, MinimumLength = 8)]
         public string CIN { get; set; }
     }
 }
