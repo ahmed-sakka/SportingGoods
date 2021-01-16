@@ -9,10 +9,12 @@ namespace SportingGoods.Models
     public class Bill
     {
         public int ID { get; set; }
-        public List<Item> Items{ get; set; }
+        public Item Item{ get; set; }
+        public int ItemID { get; set; }
         public Client Client { get; set; }
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }
         public int ClientID { get; set; }
+
     }
 }

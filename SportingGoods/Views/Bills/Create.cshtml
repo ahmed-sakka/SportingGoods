@@ -4,34 +4,44 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Bill</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label class="control-label">Client</label>
-                <select class="form-control" asp-items="ViewBag.ClientID" asp-for="ClientID"></select>
-                <span asp-validation-for="ClientID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Date" class="control-label"></label>
-                <input asp-for="Date" class="form-control" />
-                <span asp-validation-for="Date" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+<div class="page-title">
+    <h3 class="breadcrumb-header">New bill</h3>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<div id="main-wrapper">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-white">
+                <div class="panel-heading clearfix">
+                    <form asp-action="Create" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label class="control-label">Client</label>
+                            <select class="form-control" asp-items="ViewBag.ClientID" asp-for="ClientID"></select>
+                            <span asp-validation-for="ClientID" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Item</label>
+                            <select class="form-control" asp-items="ViewBag.ItemID" asp-for="ItemID"></select>
+                            <span asp-validation-for="ItemID" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Date" class="control-label"></label>
+                            <input asp-for="Date" class="form-control" />
+                            <span asp-validation-for="Date" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div><!-- Row -->
+</div><!-- Main Wrapper -->
+
+
+<a class="btn btn-info" asp-action="Index"><i class="icon-arrow-left2 m-r-xs"></i>Return</a>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

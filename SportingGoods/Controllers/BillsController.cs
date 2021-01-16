@@ -14,18 +14,21 @@ namespace SportingGoods.Controllers
     {
         private readonly AppDbContext _context;
         readonly IClientRepository _ClientRepository;
+        readonly IItemRepository _ItemRepository;
 
 
-        public BillsController(AppDbContext context, IClientRepository clientRepository)
+        public BillsController(AppDbContext context, IClientRepository clientRepository, IItemRepository itemRepository)
         {
             _context = context;
             _ClientRepository = clientRepository;
+            _ItemRepository = itemRepository;
         }
 
         // GET: Bills
         public async Task<IActionResult> Index()
         {
             ViewBag.ClientID = new SelectList(_ClientRepository.GetAll(), "ClientID", "FirstName");
+            ViewBag.ItemID = new SelectList(_ItemRepository.GetAll(), "ID", "Name");
             return View(await _context.Bills.ToListAsync());
         }
 
@@ -45,6 +48,7 @@ namespace SportingGoods.Controllers
             }
 
             ViewBag.ClientID = new SelectList(_ClientRepository.GetAll(), "ClientID", "FirstName");
+            ViewBag.ItemID = new SelectList(_ItemRepository.GetAll(), "ID", "Name");
             return View(bill);
         }
 
@@ -52,6 +56,7 @@ namespace SportingGoods.Controllers
         public IActionResult Create()
         {
             ViewBag.ClientID = new SelectList(_ClientRepository.GetAll(), "ClientID", "FirstName");
+            ViewBag.ItemID = new SelectList(_ItemRepository.GetAll(), "ID", "Name");
             return View();
         }
 
@@ -60,7 +65,7 @@ namespace SportingGoods.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Date,Client,ClientID")] Bill bill)
+        public async Task<IActionResult> Create([Bind("ID,Date,Client,ClientID,Item,ItemID")] Bill bill)
         {
             if (ModelState.IsValid)
             {
@@ -69,6 +74,7 @@ namespace SportingGoods.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewBag.ClientID = new SelectList(_ClientRepository.GetAll(), "ClientID", "FirstName", bill.Client);
+            ViewBag.ItemID = new SelectList(_ItemRepository.GetAll(), "ID", "Name", bill.Item);
             return View(bill);
         }
 
@@ -86,6 +92,7 @@ namespace SportingGoods.Controllers
                 return NotFound();
             }
             ViewBag.ClientID = new SelectList(_ClientRepository.GetAll(), "ClientID", "FirstName");
+            ViewBag.ItemID = new SelectList(_ItemRepository.GetAll(), "ID", "Name");
             return View(bill);
         }
 
@@ -94,7 +101,7 @@ namespace SportingGoods.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Date,Client,ClientID")] Bill bill)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Date,Client,ClientID,Item,ItemID")] Bill bill)
         {
             if (id != bill.ID)
             {
@@ -122,6 +129,7 @@ namespace SportingGoods.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewBag.ClientID = new SelectList(_ClientRepository.GetAll(), "ClientID", "FirstName", bill.Client);
+            ViewBag.ItemID = new SelectList(_ItemRepository.GetAll(), "ID", "Name", bill.Item);
             return View(bill);
         }
 
@@ -141,6 +149,7 @@ namespace SportingGoods.Controllers
             }
 
             ViewBag.ClientID = new SelectList(_ClientRepository.GetAll(), "ClientID", "FirstName");
+            ViewBag.ItemID = new SelectList(_ItemRepository.GetAll(), "ID", "Name");
             return View(bill);
         }
 
@@ -151,6 +160,7 @@ namespace SportingGoods.Controllers
         {
             var bill = await _context.Bills.FindAsync(id);
             ViewBag.ClientID = new SelectList(_ClientRepository.GetAll(), "ClientID", "FirstName", bill.Client);
+            ViewBag.ItemsIDs = new SelectList(_ItemRepository.GetAll(), "ID", "Name", bill.Item) ;
             _context.Bills.Remove(bill);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

@@ -37,7 +37,8 @@ namespace SportingGoods.Models.Repositories
                 b.Client = bill.Client;
                 b.ClientID = bill.ClientID;
                 b.Date = bill.Date;
-                b.Items = bill.Items;
+                b.Item = bill.Item;
+                b.ItemID = bill.ItemID;
                 context.SaveChanges();
             }
         }

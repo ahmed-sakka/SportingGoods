@@ -30,7 +30,7 @@
                                         @Html.DisplayNameFor(model => model.Date)
                                     </th>
                                     <th>
-                                        Number of items
+                                        Item
                                     </th>
                                 
                                     <th></th>
@@ -47,7 +47,7 @@
                                             @Html.DisplayFor(modelItem => item.Date)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Items.Count)
+                                            @Html.DisplayFor(modelItem => item.Item.Name)
                                         </td>
                                         <td>
                                             <a asp-action="Details" asp-route-id="@item.ID" class="text-primary"><i class="menu-icon icon-eye"></i>&nbsp;Details</a> &nbsp;

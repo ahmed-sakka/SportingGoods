@@ -24,6 +24,12 @@
     <Compile Include="Migrations\20210116111301_rename-categoryID.Designer.cs" />
     <Compile Include="Migrations\20210116124921_add-clientID.cs" />
     <Compile Include="Migrations\20210116124921_add-clientID.Designer.cs" />
+    <Compile Include="Migrations\20210116134517_add-ItemsIDs.cs" />
+    <Compile Include="Migrations\20210116134517_add-ItemsIDs.Designer.cs" />
+    <Compile Include="Migrations\20210116144414_add-ItemID.cs" />
+    <Compile Include="Migrations\20210116144414_add-ItemID.Designer.cs" />
+    <Compile Include="Migrations\20210116145241_update-ItemID.cs" />
+    <Compile Include="Migrations\20210116145241_update-ItemID.Designer.cs" />
     <Compile Include="Migrations\AppDbContextModelSnapshot.cs" />
   </ItemGroup>
 

@@ -18,5 +18,6 @@ namespace SportingGoods.Models
         public string Brand { get; set; }
         public int CategoryID { get; set; }
         public Category Category { get; set; }
+        public ICollection<Bill> Bills { get; set; }
     }
 }
