@@ -21,7 +21,7 @@ namespace SportingGoods.Models.Repositories
 
         public void Delete(Client client)
         {
-            Client c = context.Clients.Find(client.ID);
+            Client c = context.Clients.Find(client.ClientID);
             if (c != null)
             {
                 context.Clients.Remove(c);
@@ -31,7 +31,7 @@ namespace SportingGoods.Models.Repositories
 
         public void Edit(Client client)
         {
-            Client c = context.Clients.Find(client.ID);
+            Client c = context.Clients.Find(client.ClientID);
             if (c != null)
             {
                 c.FirstName = client.FirstName;

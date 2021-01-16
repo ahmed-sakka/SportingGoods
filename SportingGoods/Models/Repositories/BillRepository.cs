@@ -35,6 +35,7 @@ namespace SportingGoods.Models.Repositories
             if (b != null)
             {
                 b.Client = bill.Client;
+                b.ClientID = bill.ClientID;
                 b.Date = bill.Date;
                 b.Items = bill.Items;
                 context.SaveChanges();

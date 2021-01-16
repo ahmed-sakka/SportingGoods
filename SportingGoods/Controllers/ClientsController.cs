@@ -33,7 +33,7 @@ namespace SportingGoods.Controllers
             }
 
             var client = await _context.Clients
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.ClientID == id);
             if (client == null)
             {
                 return NotFound();
@@ -53,7 +53,7 @@ namespace SportingGoods.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,FirstName,LastName,Gender,CIN")] Client client)
+        public async Task<IActionResult> Create([Bind("ClientID,FirstName,LastName,Gender,CIN")] Client client)
         {
             if (ModelState.IsValid)
             {
@@ -85,9 +85,9 @@ namespace SportingGoods.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,FirstName,LastName,Gender,CIN")] Client client)
+        public async Task<IActionResult> Edit(int id, [Bind("ClientID,FirstName,LastName,Gender,CIN")] Client client)
         {
-            if (id != client.ID)
+            if (id != client.ClientID)
             {
                 return NotFound();
             }
@@ -101,7 +101,7 @@ namespace SportingGoods.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ClientExists(client.ID))
+                    if (!ClientExists(client.ClientID))
                     {
                         return NotFound();
                     }
@@ -124,7 +124,7 @@ namespace SportingGoods.Controllers
             }
 
             var client = await _context.Clients
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.ClientID == id);
             if (client == null)
             {
                 return NotFound();
@@ -146,7 +146,7 @@ namespace SportingGoods.Controllers
 
         private bool ClientExists(int id)
         {
-            return _context.Clients.Any(e => e.ID == id);
+            return _context.Clients.Any(e => e.ClientID == id);
         }
     }
 }

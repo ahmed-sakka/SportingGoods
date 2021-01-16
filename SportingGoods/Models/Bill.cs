@@ -13,5 +13,6 @@ namespace SportingGoods.Models
         public Client Client { get; set; }
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }
+        public int ClientID { get; set; }
     }
 }

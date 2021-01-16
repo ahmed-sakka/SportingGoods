@@ -22,6 +22,8 @@
     <Compile Include="Migrations\20210116103742_add-categoryID.Designer.cs" />
     <Compile Include="Migrations\20210116111301_rename-categoryID.cs" />
     <Compile Include="Migrations\20210116111301_rename-categoryID.Designer.cs" />
+    <Compile Include="Migrations\20210116124921_add-clientID.cs" />
+    <Compile Include="Migrations\20210116124921_add-clientID.Designer.cs" />
     <Compile Include="Migrations\AppDbContextModelSnapshot.cs" />
   </ItemGroup>
 

@@ -8,7 +8,7 @@ namespace SportingGoods.Models
 {
     public class Client
     {
-        public int ID { get; set; }
+        public int ClientID { get; set; }
         [Required]
         public string FirstName { get; set; }
         [Required]
@@ -17,5 +17,7 @@ namespace SportingGoods.Models
         [Required]
         [StringLength(8, MinimumLength = 8)]
         public string CIN { get; set; }
+        public ICollection<Bill> Bills { get; set; }
+
     }
 }
