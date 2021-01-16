@@ -1,8 +1,63 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Dashboard";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <div class="page-title">
+        <h3 class="breadcrumb-header">Dashboard</h3>
+    </div>
+    <div id="main-wrapper">
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-white stats-widget">
+                    <div class="panel-body">
+                        <div class="pull-left">
+                            <span class="stats-number">@ViewBag.ClientsCount</span>
+                            <p class="stats-info">Clients</p>
+                        </div>
+                        <div class="pull-right">
+                            <i class="icon-people stats-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-white stats-widget">
+                    <div class="panel-body">
+                        <div class="pull-left">
+                            <span class="stats-number">@ViewBag.CategoriesCount</span>
+                            <p class="stats-info">Categories</p>
+                        </div>
+                        <div class="pull-right">
+                            <i class="icon-format_list_bulleted stats-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-white stats-widget">
+                    <div class="panel-body">
+                        <div class="pull-left">
+                            <span class="stats-number">@ViewBag.BillsCount</span>
+                            <p class="stats-info">Bills</p>
+                        </div>
+                        <div class="pull-right">
+                            <i class="icon-cart stats-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-white stats-widget">
+                    <div class="panel-body">
+                        <div class="pull-left">
+                            <span class="stats-number">@ViewBag.ItemsCount</span>
+                            <p class="stats-info">Items</p>
+                        </div>
+                        <div class="pull-right">
+                            <i class="icon-shop stats-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- Row -->
+    </div>
