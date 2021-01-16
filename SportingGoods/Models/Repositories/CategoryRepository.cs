@@ -21,7 +21,7 @@ namespace SportingGoods.Models.Repositories
 
         public void Delete(Category category)
         {
-            Item c = context.Items.Find(category.ID);
+            Item c = context.Items.Find(category.CategoryID);
             if (c != null)
             {
                 context.Items.Remove(c);
@@ -31,7 +31,7 @@ namespace SportingGoods.Models.Repositories
 
         public void Edit(Category category)
         {
-            Category c = context.Categories.Find(category.ID);
+            Category c = context.Categories.Find(category.CategoryID);
             if (c != null)
             {
                 c.Name = category.Name;

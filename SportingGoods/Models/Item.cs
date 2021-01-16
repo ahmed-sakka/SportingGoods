@@ -16,6 +16,7 @@ namespace SportingGoods.Models
         [Required]
         public double Price { get; set; }
         public string Brand { get; set; }
+        public int CategoryID { get; set; }
         public Category Category { get; set; }
     }
 }

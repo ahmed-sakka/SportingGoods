@@ -8,9 +8,10 @@ namespace SportingGoods.Models
 {
     public class Category
     {
-        public int ID { get; set; }
+        public int CategoryID { get; set; }
         [Required]
         public string Name { get; set; }
         public string Description { get; set; }
+        public ICollection<Item> Items { get; set; }
     }
 }

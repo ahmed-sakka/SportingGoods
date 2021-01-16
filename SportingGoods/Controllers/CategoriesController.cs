@@ -33,7 +33,7 @@ namespace SportingGoods.Controllers
             }
 
             var category = await _context.Categories
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.CategoryID == id);
             if (category == null)
             {
                 return NotFound();
@@ -53,7 +53,7 @@ namespace SportingGoods.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,Description")] Category category)
+        public async Task<IActionResult> Create([Bind("CategoryID,Name,Description")] Category category)
         {
             if (ModelState.IsValid)
             {
@@ -85,9 +85,9 @@ namespace SportingGoods.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Description")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("CategoryID,Name,Description")] Category category)
         {
-            if (id != category.ID)
+            if (id != category.CategoryID)
             {
                 return NotFound();
             }
@@ -101,7 +101,7 @@ namespace SportingGoods.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CategoryExists(category.ID))
+                    if (!CategoryExists(category.CategoryID))
                     {
                         return NotFound();
                     }
@@ -124,7 +124,7 @@ namespace SportingGoods.Controllers
             }
 
             var category = await _context.Categories
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.CategoryID == id);
             if (category == null)
             {
                 return NotFound();
@@ -146,7 +146,7 @@ namespace SportingGoods.Controllers
 
         private bool CategoryExists(int id)
         {
-            return _context.Categories.Any(e => e.ID == id);
+            return _context.Categories.Any(e => e.CategoryID == id);
         }
     }
 }

@@ -36,8 +36,7 @@
         <div class="page-sidebar">
             <a class="logo-box" asp-area="" asp-controller="Home" asp-action="Index">
                 <span>Sporting Goods</span>
-                <i class="icon-radio_button_unchecked" id="fixed-sidebar-toggle-button"></i>
-                <i class="icon-close" id="sidebar-toggle-button-close"></i>
+              
             </a>
             <div class="page-sidebar-inner">
                 <div class="page-sidebar-menu">
@@ -45,27 +44,27 @@
 
                         <li class="menu-divider"></li>
 
-                        <li class="active-page">
+                        <li class="@if (@Url.Action().Length < 2) { Write("active-page"); }">
                             <a asp-area="" asp-controller="Home" asp-action="Index">
                                 <i class="menu-icon icon-dashboard"></i><span>Dashboard</span>
                             </a>
                         </li>
-                        <li class="">
+                        <li class="@if (@Url.Action().Contains("Clients")) { Write("active-page"); }" >
                             <a asp-area="" asp-controller="Clients" asp-action="Index">
                                 <i class="menu-icon icon-people"></i><span>Clients</span>
                             </a>
                         </li>
-                        <li class="">
+                        <li class="@if (@Url.Action().Contains("Categories")) { Write("active-page"); }">
                             <a asp-area="" asp-controller="Categories" asp-action="Index">
                                 <i class="menu-icon icon-format_list_bulleted"></i><span>Categories</span>
                             </a>
                         </li>
-                        <li class="">
+                        <li class="@if (@Url.Action().Contains("Bills")) { Write("active-page"); }">
                             <a asp-area="" asp-controller="Bills" asp-action="Index">
                                 <i class="menu-icon icon-cart"></i><span>Bills</span>
                             </a>
                         </li>
-                        <li class="">
+                        <li class="@if (@Url.Action().Contains("Items")) { Write("active-page"); }">
                             <a asp-area="" asp-controller="Items" asp-action="Index">
                                 <i class="menu-icon icon-shop"></i><span>Items</span>
                             </a>

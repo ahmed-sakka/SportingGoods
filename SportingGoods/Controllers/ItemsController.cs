@@ -15,20 +15,20 @@ namespace SportingGoods.Controllers
 {
     public class ItemsController : Controller
     {
-        private readonly AppDbContext _context;
-        private readonly IWebHostEnvironment hostingEnvironment;
-        //private readonly CategoryRepository _CategoryRepository;
-        public ItemsController(AppDbContext context, IWebHostEnvironment hostingEnvironment/*, CategoryRepository categoryRepository*/)
+        readonly AppDbContext _context;
+        readonly IWebHostEnvironment hostingEnvironment;
+        readonly ICategoryRepository _CategoryRepository;
+        public ItemsController(AppDbContext context, IWebHostEnvironment hostingEnvironment, ICategoryRepository categoryRepository)
         {
             _context = context;
             this.hostingEnvironment = hostingEnvironment;
-            //_CategoryRepository = categoryRepository;
+            _CategoryRepository = categoryRepository;
         }
 
         // GET: Items
         public async Task<IActionResult> Index()
         {
-            //ViewBag.CategoryID = new SelectList(_CategoryRepository.GetAll(), "ID", "Name");
+            ViewBag.CategoryID = new SelectList(_CategoryRepository.GetAll(), "CategoryID", "Name");
             return View(await _context.Items.ToListAsync());
         }
 
@@ -47,14 +47,14 @@ namespace SportingGoods.Controllers
                 return NotFound();
             }
 
-            //ViewBag.CategoryID = new SelectList(_CategoryRepository.GetAll(), "ID", "Name");
+            ViewBag.CategoryID = new SelectList(_CategoryRepository.GetAll(), "CategoryID", "Name");
             return View(item);
         }
 
         // GET: Items/Create
         public IActionResult Create()
         {
-            //ViewBag.CategoryID = new SelectList(_CategoryRepository.GetAll(), "ID", "Name");
+            ViewBag.CategoryID = new SelectList(_CategoryRepository.GetAll(), "CategoryID", "Name");
             return View();
         }
 
@@ -63,7 +63,7 @@ namespace SportingGoods.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,Category,Description,Picture,Price,Brand")] Item item, CreateViewModel model)
+        public async Task<IActionResult> Create([Bind("ID,Name,Category,Description,Picture,Price,Brand,CategoryID")] Item item, CreateItemViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -98,14 +98,15 @@ namespace SportingGoods.Controllers
                     Price = model.Price,
                     Brand = model.Brand,
                     Category = model.Category,
-                    Picture = uniqueFileName
+                    Picture = uniqueFileName,
+                    CategoryID = model.CategoryID
                 };
 
                 _context.Add(newItem);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            //ViewBag.CategoryID = new SelectList(_CategoryRepository.GetAll(), "ID", "Name");
+            ViewBag.CategoryID = new SelectList(_CategoryRepository.GetAll(), "CategoryID", "Name",item.Category);
             return View(item);
         }
 
@@ -122,7 +123,21 @@ namespace SportingGoods.Controllers
             {
                 return NotFound();
             }
-            return View(item);
+            EditItemViewModel editItemViewModel = new EditItemViewModel
+            {
+                ID = item.ID,
+                Name = item.Name,
+                Brand = item.Brand,
+                ExistingPicture = item.Picture,
+                Price = item.Price,
+                Description = item.Description,
+                Category = item.Category,
+                CategoryID = item.CategoryID
+
+            };
+            ViewBag.CategoryID = new SelectList(_CategoryRepository.GetAll(), "CategoryID", "Name");
+
+            return View(editItemViewModel);
         }
 
         // POST: Items/Edit/5
@@ -130,15 +145,41 @@ namespace SportingGoods.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Category,Description,Picture,Price,Brand")] Item item)
+        public async Task<IActionResult> Edit(int id, EditItemViewModel model)
         {
-            if (id != item.ID)
+            /*
+            if (id != model.ID)
             {
                 return NotFound();
             }
+            */
+        
 
             if (ModelState.IsValid)
             {
+                Item item = _context.Items.Find(model.ID);
+                item.Name = model.Name;
+                item.Description = model.Description;
+                item.Price = model.Price;
+                item.Brand = model.Brand;
+                item.Category = model.Category;
+                item.CategoryID = model.CategoryID;
+
+               
+                if (model.Picture != null)
+                {
+                    
+                    if (model.ExistingPicture != null)
+                    {
+                        string filePath = Path.Combine(hostingEnvironment.WebRootPath,
+                            "images/items", model.ExistingPicture);
+                        System.IO.File.Delete(filePath);
+                    }
+                    
+                    item.Picture = ProcessUploadedFile(model);
+                }
+
+
                 try
                 {
                     _context.Update(item);
@@ -157,7 +198,28 @@ namespace SportingGoods.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(item);
+            ViewBag.CategoryID = new SelectList(_CategoryRepository.GetAll(), "CategoryID", "Name", model.Category);
+
+            return View(model);
+        }
+
+        [NonAction]
+        private string ProcessUploadedFile(EditItemViewModel model)
+        {
+            string uniqueFileName = null;
+
+            if (model.Picture != null)
+            {
+                string uploadsFolder = Path.Combine(hostingEnvironment.WebRootPath, "images/items");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Picture.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    model.Picture.CopyTo(fileStream);
+                }
+            }
+
+            return uniqueFileName;
         }
 
         // GET: Items/Delete/5
@@ -174,7 +236,7 @@ namespace SportingGoods.Controllers
             {
                 return NotFound();
             }
-
+            ViewBag.CategoryID = new SelectList(_CategoryRepository.GetAll(), "CategoryID", "Name");
             return View(item);
         }
 
@@ -184,6 +246,7 @@ namespace SportingGoods.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var item = await _context.Items.FindAsync(id);
+            ViewBag.CategoryID = new SelectList(_CategoryRepository.GetAll(), "CategoryID", "Name", item.Category);
             _context.Items.Remove(item);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
